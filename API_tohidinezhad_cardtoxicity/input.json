@@ -1,0 +1,14 @@
+{
+            "Age": 75,
+            "BMI": "Normal",
+            "Cardiac diseases": "Yes",
+            "Vascular diseases": "No",
+            "Pacemaker/defibrillator": "No",
+            "Chemotherapy": "None",
+            "QRS interval": 115,
+            "Heart Volume": 795,
+            "Right lung volume": 2200,
+            "Left atrium Dmax": 65,
+            "Esophagus": 2,
+            "Left lung Dmax": 6
+}
