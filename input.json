@@ -1,11 +1,11 @@
 {
-         "Age at RT": 75,
-         "BMI": "Overweight",
+         "Age at RT": 66.8,
+         "BMI": "Underweight",
          "Alcohol": "Current",
-         "Cardiac procedure": "Yes",
+         "Cardiac procedure": "No",
          "Chemotherapy": "Concurrent",
-         "Left atrium Dmax": 6,
+         "Left atrium Dmax": 66.53,
          "Tumor location": "Upper",
-         "FEV1 (%)": 15,
-         "Creatinine (\u03bcmol/L)": 130
+         "FEV1 (%)": 66.63,
+         "Creatinine (\u03bcmol/L)": 69.44
 }
