@@ -1,0 +1,12 @@
+Flask==3.0.3
+Flask-Cors==4.0.1
+Flask-RESTful==0.3.10
+json-stream==2.3.2
+json-stream-rs-tokenizer==0.4.26
+json5==0.9.6
+jsonlines==4.0.0
+jsonpatch==1.32
+jsonpath-ng==1.6.1
+jsonpointer==2.1
+jsonschema==4.19.2
+jsonschema-specifications==2023.7.1
