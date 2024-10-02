@@ -1,0 +1,5 @@
+{
+    "feature_names": ["MO/LY", "differentiation", "CA125 U/ml", "Ascites cytology", "NE", "LY%", "age"],
+    "input_parameters": [[0.1, 0.6, 1000, 3, 9000, 25, 55]]
+  }
+  
