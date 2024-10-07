@@ -6,6 +6,8 @@ import json
 class oberije_lung_survival(logistic_regression):
     def __init__(self):
         self._model_parameters = {
+            "model_uri": "https://cancerdata.org/id/10.5072/candat.2015.02",
+            "model_name": "Oberije survival prediction model for lung cancer patients",
             "intercept": -0.5,
             "covariate_weights": {
                 "gender": 0.8325,
