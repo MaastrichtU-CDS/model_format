@@ -1,64 +1,49 @@
 
 from math import log, exp
+from model_execution import logistic_regression
 import json
 
-model_parameters = json.load(open('model_parameters.json'))
-
-def preprocess_data(input_object):
-    """
-    This function is used to convert the input data into the correct format for the model.
-
-    Parameters:
-    - input_object: a dictionary, or list with multiple dictionaries, containing the input data
-
-    Returns:
-    - preprocessed_data: a dictionary, or list with multiple dictionaries, containing the preprocessed data
-    """
-
-    if isinstance(input_object, dict):
-        input_object['gtv'] = log(input_object['gtv'])
-    elif isinstance(input_object, list):
-        for item in input_object:
-            item['gtv'] = log(item['gtv'])    
+class oberije_lung_survival(logistic_regression):
+    def __init__(self):
+        self._model_parameters = {
+            "intercept": -0.5,
+            "covariate_weights": {
+                "gender": 0.8325,
+                "who": -0.4395,
+                "fev1": 0.0056,
+                "lymph": -0.28002,
+                "gtv": -0.7746
+            }
+        }
     
-    return input_object
+    def _preprocess(self, data):
+        """
+        This function is used to convert the input data into the correct format for the model.
 
-def calculate_probability(input_object):
-    """
-    Calculate the probability of 2-year survival for a patient with given covariates.
+        Parameters:
+        - input_object: a dictionary, or list with multiple dictionaries, containing the input data
 
-    Parameters:
-    - input_object: a dictionary or list containing the input data
-    """
-    
-    # Preprocess the input data
-    input_object = preprocess_data(input_object)
+        Returns:
+        - preprocessed_data: a dictionary, or list with multiple dictionaries, containing the preprocessed data
+        """
 
-    # Calculate the probability
-    if isinstance(input_object, dict):
-        return calculate_probability_single(input_object)
-    elif isinstance(input_object, list):
-        return [calculate_probability_single(item) for item in input_object]
-    
-def calculate_probability_single(input_object):
-    """
-    Calculate the probability of 2-year survival for a patient with given covariates.
-    This model is based on the following publication: Oberije C, De Ruysscher D, Houben A, et al. A Validated Prediction Model for Overall Survival From Stage III Non-Small Cell Lung Cancer: Toward Survival Prediction for Individual Patients. Int J Radiat Oncol Biol Phys. 2015;92(4):935-944. doi:10.1016/j.ijrobp.2015.03.030
+        # perform log transformation on the gtv value which is in the data list/dictionary
+        if isinstance(data, list):
+            for i in range(len(data)):
+                data[i]['gtv'] = log(data[i]['gtv'])
+        else:
+            data['gtv'] = log(data['gtv'])
+        
+        return data
 
-    Parameters:
-    - input_object: a dictionary containing the input data:
-        - gender: 0 for male and 1 for female
-        - who: WHO performance status (range: 0-4)
-        - fev1: forced expiratory volume in 1 second (in liters)
-        - lymph: number of positive lymph nodes (range: 0-10)
-        - gtv: gross tumor volume (in cm^3, range 0-1000)
-    """
-    
-    # Calculate the linear predictor
-    linear_predictor = model_parameters['intercept']
-    for covariate, weight in model_parameters['covariate_weights'].items():
-        linear_predictor += weight * input_object[covariate]
-    
-    # Calculate the probability
-    probability = 1 / (1 + exp(-exp(linear_predictor)))
-    return probability
+model_obj = oberije_lung_survival()
+print(model_obj.get_input_parameters())
+print(model_obj.predict(
+    {
+        "gender": 0,
+        "who": 1,
+        "fev1": 2,
+        "lymph": 3,
+        "gtv": 800
+    }
+))
