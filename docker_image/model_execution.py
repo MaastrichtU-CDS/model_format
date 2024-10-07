@@ -3,6 +3,12 @@ import json
 from math import exp
 
 class model_execution:
+    def get_model_metadata(self):
+        return {
+            "model_name": None,
+            "model_uri": None,
+        }
+
     def get_input_parameters(self):
         """
         Get the input parameters of the model.
@@ -64,6 +70,12 @@ class logistic_regression(model_execution):
         if self._model_parameters is None:
             raise ValueError("Model parameters not provided")
     
+    def get_model_metadata(self):
+        return {
+            "model_name": self._model_parameters['model_name'],
+            "model_uri": self._model_parameters['model_uri'],
+        }
+
     def get_input_parameters(self):
         """
         Get the input parameters of the model.
@@ -84,8 +96,9 @@ class logistic_regression(model_execution):
         # Calculate the linear predictor
         linear_predictor = self._model_parameters['intercept']
         for covariate, weight in self._model_parameters['covariate_weights'].items():
-            linear_predictor += weight * input_object[covariate]
+            print(float(input_object[covariate]))
+            linear_predictor += float(weight) * float(input_object[covariate])
         
         # Calculate the probability
-        probability = 1 / (1 + exp(-exp(linear_predictor)))
+        probability = 1 / (1 + exp(-(linear_predictor)))
         return probability
