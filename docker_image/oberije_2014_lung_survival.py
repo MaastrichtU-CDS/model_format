@@ -36,14 +36,15 @@ class oberije_lung_survival(logistic_regression):
         
         return data
 
-model_obj = oberije_lung_survival()
-print(model_obj.get_input_parameters())
-print(model_obj.predict(
-    {
-        "gender": 0,
-        "who": 1,
-        "fev1": 2,
-        "lymph": 3,
-        "gtv": 800
-    }
-))
+if __name__ == "__main__":
+    model_obj = oberije_lung_survival()
+    print(model_obj.get_input_parameters())
+    print(model_obj.predict(
+        {
+            "gender": 0,
+            "who": 1,
+            "fev1": 2,
+            "lymph": 3,
+            "gtv": 800
+        }
+    ))
