@@ -16,6 +16,9 @@ def get_model():
 
 @app.get("/")
 def read_root():
+    """
+    Get the available models and their endpoints.
+    """
     model_metadata = get_model().get_model_metadata()
     return {
         "models": [
@@ -31,13 +34,13 @@ def read_root():
 @app.post("/predict")
 def predict(data: Union[dict, List[dict]]):
     """
-    Calculate the probability of 2-year survival for a patient with given covariates.
+    Calculate the probability for the current model.
 
     Parameters:
-    - data: a dictionary containing the input data
+    - data: a dictionary (or list of dictionaries) containing the input data
 
     Returns:
-    - probability: the probability of 2-year survival
+    - probability: the probability which the model calculates
     """
     model_obj = get_model()
     return model_obj.predict(data)
