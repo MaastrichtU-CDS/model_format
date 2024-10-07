@@ -1,0 +1,9 @@
+{
+    "intercept": -0.5,
+    "covariate_weights": {
+        "gender": 0.8325,
+        "who": -0.4395,
+        "fev1": 0.0056,
+        "lymph": -0.28002,
+        "gtv": -0.7746
+}
